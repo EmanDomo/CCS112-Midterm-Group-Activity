@@ -13,7 +13,7 @@ function App() {
       name: 'Nike Air Max 90',
       category: 'Shoes',
       seller: 'Nike Official Store',
-      price: 3499
+      price: 3999
     },
     {
       url: 'https://www.capital.com.ph/cdn/shop/products/GX9140-140_grande.jpg?v=1664769628',
