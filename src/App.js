@@ -27,7 +27,7 @@ function App() {
       name: 'Puma RS-X3',
       category: 'Shoes',
       seller: 'Puma Store',
-      price: 2499
+      price: 5999
     },
     {
       url: 'https://i.ebayimg.com/images/g/JmMAAOSw~otWdL5u/s-l1200.jpg',
