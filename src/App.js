@@ -34,7 +34,7 @@ function App() {
       name: 'Vans Old Skool',
       category: 'Shoes',
       seller: 'Vans Official',
-      price: 1999
+      price: 1499
     },
   ])
 
