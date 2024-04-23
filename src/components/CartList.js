@@ -40,7 +40,7 @@ function CartList({ cart }) {
                 })
             }
 
-            <p> Total  <span></span>
+            <p> Total ₱<span></span>
                 {
                     CART.map(item => item.price * item.quantity).reduce((total, value) => total + value, 0)
                 }
