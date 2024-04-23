@@ -13,7 +13,7 @@ const ProductList = ({product,addToCart}) => {
                                 <p>{productItem.name} | {productItem.category} </p>
                                 <p> {productItem.seller} </p>
                                 <p> ₱{productItem.price}.00</p>
-                                <button onClick={()=> addToCart(productItem)}>Add To Cart</button>
+                                <button onClick={()=> addToCart(productItem)}>Add to cart</button>
                             </div>
                         </div>
                     )
