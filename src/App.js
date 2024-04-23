@@ -36,6 +36,8 @@ function App() {
       seller: 'Vans Official',
       price: 1499
     },
+
+
   ])
 
   const [cart, setCart] = useState([])
