@@ -1,71 +1,110 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
-import { useState } from 'react';
 import CartList from './components/CartList';
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [newProduct, setNewProduct] = useState({
+    name: '',
+    seller: '',
+    price: '',
+    image: null,
+  });
+
+  const handleClick = () => {
+    setShowModal(true);
+  };
+
+  const handleAdd = () => {
+    const updatedProductList = [...product, newProduct];
+    setProduct(updatedProductList);
+    setShowModal(false);
+    setNewProduct({
+      name: '',
+      seller: '',
+      price: '',
+      image: null,
+    });
+  };
 
   const [product, setProduct] = useState([
-    {
-      url: 'https://static.nike.com/a/images/t_default/80b8277d-ede8-4885-9c37-2fe1cdf341aa/air-max-90-shoes-K0mczj.png',
-      name: 'Nike Air Max 90',
-      category: 'Shoes',
-      seller: 'Nike Official Store',
-      price: 3999
-    },
-    {
-      url: 'https://www.capital.com.ph/cdn/shop/products/GX9140-140_grande.jpg?v=1664769628',
-      name: 'Adidas Ultraboost',
-      category: 'Shoes',
-      seller: 'Adidas Online',
-      price: 2999
-    },
-    {
-      url: 'https://www.capital.com.ph/cdn/shop/products/373308-01.jpg?v=1663221741',
-      name: 'Puma RS-X3',
-      category: 'Shoes',
-      seller: 'Puma Store',
-      price: 7999
-    },
-    {
-      url: 'https://i.ebayimg.com/images/g/JmMAAOSw~otWdL5u/s-l1200.jpg',
-      name: 'Vans Old Skool',
-      category: 'Shoes',
-      seller: 'Vans Official',
-      price: 1499
-    },
-
-
-  ])
-
-  const [cart, setCart] = useState([])
-  const [showCart, setShowCart] = useState(false)
+    // Existing products
+  ]);
 
   const addToCart = (data) => {
-    setCart([...cart, { ...data, quantity: 1 }])
-  }
+  const newItem = { ...data, quantity: 1, url: data.url }; // Include the 'url' property
+  setCart([...cart, newItem]);
+};
 
   const handleShow = (value) => {
-    setShowCart(value)
-  }
+    setShowCart(value);
+  };
 
   return (
-    <div>
-      <Header count={cart.length}
-        handleShow={handleShow} ></Header>
+    <div className="App">
+      <Header count={cart.length} handleShow={handleShow} />
 
-      {
-        showCart ?
-          <CartList cart={cart} ></CartList> :
-          <ProductList product={product} addToCart={addToCart} ></ProductList>
-      }
+      <button onClick={handleClick}>Add an Item</button>
 
-      
+      {/* Conditionally render modal */}
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <div>
+              <h1>Add Item</h1>
+
+              <br />
+              <br />
+
+              <input
+                type="file"
+                name="myImage"
+                onChange={(event) => setNewProduct({ ...newProduct, image: event.target.files[0] })}
+              />
+              <br />
+              <label>
+                Name:
+                <input
+                  type="text"
+                  value={newProduct.name}
+                  onChange={(event) => setNewProduct({ ...newProduct, name: event.target.value })}
+                />
+              </label>
+              <br />
+              <label>
+                Seller:
+                <input
+                  type="text"
+                  value={newProduct.seller}
+                  onChange={(event) => setNewProduct({ ...newProduct, seller: event.target.value })}
+                />
+              </label>
+              <br />
+              <label>
+                Price: ₱
+                <input
+                  type="text"
+                  value={newProduct.price}
+                  onChange={(event) => setNewProduct({ ...newProduct, price: event.target.value })}
+                />
+              </label>
+              <br />
+              <button onClick={handleAdd}>Add</button>
+              <button onClick={() => setShowModal(false)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div>
+        {showCart ? <CartList cart={cart} /> : <ProductList product={product} addToCart={addToCart} />}
+      </div>
     </div>
   );
-  
 }
 
 export default App;
